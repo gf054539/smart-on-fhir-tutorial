@@ -23,7 +23,7 @@
                     }
                   });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, user).fail(onError);
 
         $.when(pt, obv, user).done(function(patient, obv, user) {
           var byCodes = smart.byCodes(obv, 'code');
@@ -66,7 +66,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-		  p.userid = user.userid
+		  p.userid = JSON.stringify(user);
           ret.resolve(p);
         });
       } else {
