@@ -12,7 +12,7 @@
 		var user = smart.user.read();
 		$.when(user).done( function(user) {
 			ret.resolve(user);
-		}
+		});
 	  } else {
 		  onError();
 	  }
