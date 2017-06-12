@@ -8,6 +8,14 @@
     }
 
     function onReady(smart)  {
+	  if (smart.hasOwnProperty('user')) {
+		var user = smart.user.read();
+		$.when(user).done( function(user) {
+			ret.resolve(user);
+		}
+	  } else {
+		  onError();
+	  }
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
@@ -142,6 +150,10 @@
     }
   }
 
+  window.drawVisualization = function(u) {
+	$('#userid').html(u.userid);
+  }
+  
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
