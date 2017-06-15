@@ -40,7 +40,6 @@
 		
 		$.when(user).done(function( user ) {
 			console.log(user);
-			ret.resolve(user);
 		});
 
         $.when(pt, obv).done(function(patient, obv, practitioner) {
@@ -107,7 +106,10 @@
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
       ldl: {value: ''},
-      hdl: {value: ''}
+      hdl: {value: ''},
+	  userid: {value: ''},
+	  uid: {value: ''},
+	  active: {value: ''}
     };
   }
 
@@ -173,6 +175,9 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
+	$('#userid').html(p.userid);
+	$('#uid').html(p.uid);
+	$('#active').html(p.active);
   };
 
 })(window);
