@@ -7,8 +7,8 @@
       ret.reject();
     }
 
-	function onPtFail( pt ) {
-		console.log('Pt fail', pt);
+	function onUserFail() {
+		console.log('User fail', arguments);
 		ret.reject();
 	}
 	
@@ -36,6 +36,7 @@
 
 		
         $.when(pt, obv).fail(onError);
+		$.when(user).fail(onUserFail);
 		
 		$.when(user).done(function( user ) {
 			console.log(user);
