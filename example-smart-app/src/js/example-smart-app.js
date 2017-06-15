@@ -13,7 +13,7 @@
 		var user = smart.user;
 		var usr = user.read();
         var pt = patient.read();
-		var practitioner = smart.user.api.fetchAll({
+		var practitioner = smart.api.fetchAll({
 			type: 'Practitioner',
 			query: {
 				identifier: 4464007
