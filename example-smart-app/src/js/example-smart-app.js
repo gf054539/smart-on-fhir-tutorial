@@ -40,7 +40,7 @@
                   });
 
 		$.when(pt).fail(onPtFail(pt));
-		$.when(practioner).fail(onPractitionerFail(practioner));
+		$.when(practitioner).fail(onPractitionerFail(practitioner));
 		
         $.when(pt, obv, usr).fail(onError);
 
