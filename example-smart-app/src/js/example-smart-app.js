@@ -7,6 +7,16 @@
       ret.reject();
     }
 
+	function onPtFail( something ) {
+		console.log('Pt fail', something);
+		ret.reject();
+	}
+	
+	function onPractitionerFail( anything ) {
+		console.log('practitioner fail', anything);
+		ret.reject();
+	}
+	
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
@@ -29,6 +39,9 @@
                     }
                   });
 
+		$.when(pt).fail(onPtFail(something));
+		$.when(practioner).fail(onPractitionerFail(something));
+		
         $.when(pt, obv, usr).fail(onError);
 
         $.when(pt, obv, usr).done(function(patient, obv, practitioner) {
