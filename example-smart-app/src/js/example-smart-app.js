@@ -65,7 +65,7 @@
           var p = defaultPatient();
 		  p.uid = user.id;
 		  p.user = user.user;
-		  p.userid = user.name.family[0];
+		  p.userid = user.name;
 		  
           p.birthdate = dobStr;
           p.gender = gender;
