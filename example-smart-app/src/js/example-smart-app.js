@@ -38,11 +38,8 @@
         $.when(pt, obv).fail(onError);
 		$.when(user).fail(onUserFail);
 		
-		$.when(user).done(function( user ) {
-			console.log(user);
-		});
 
-        $.when(pt, obv).done(function(patient, obv, practitioner) {
+        $.when(pt, obv, user).done(function(patient, obv, practitioner) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -66,6 +63,10 @@
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
+		  p.uid = user.id;
+		  p.user = user.user;
+		  p.userid = user.name.family[0];
+		  
           p.birthdate = dobStr;
           p.gender = gender;
           p.fname = fname;
