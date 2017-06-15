@@ -10,8 +10,15 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
+		var user = smart.user;
+		var usr = user.read();
         var pt = patient.read();
-		//var user = smart.user.read();
+		var practitioner = smart.user.api.fetchAll({
+			type: 'Practitioner',
+			query: {
+				identifier: 4464007
+			});
+		
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -23,9 +30,9 @@
                     }
                   });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, usr).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, usr).done(function(patient, obv, practitioner) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -66,14 +73,13 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-		  //p.userid = JSON.stringify(user);
           ret.resolve(p);
         });
       } else {
         onError();
       }
     }
-
+	
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
 
@@ -90,8 +96,7 @@
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
       ldl: {value: ''},
-      hdl: {value: ''},
-	  userid: {value: ''}
+      hdl: {value: ''}
     };
   }
 
@@ -157,7 +162,6 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-	$('#userid').html(p.userid);
   };
 
 })(window);
