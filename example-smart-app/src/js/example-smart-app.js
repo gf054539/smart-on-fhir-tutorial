@@ -17,7 +17,8 @@
 			type: 'Practitioner',
 			query: {
 				identifier: 4464007
-			});
+			}
+		});
 		
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
