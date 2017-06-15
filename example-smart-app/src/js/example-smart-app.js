@@ -20,10 +20,8 @@
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
-		var user = smart.user;
-		var usr = user.read();
         var pt = patient.read();
-		var practitioner = usr.read({
+		var practitioner = smart.api.read({
 			type: 'Practitioner',
 			identifier: '4464007'
 		});
@@ -41,10 +39,9 @@
 
 		$.when(pt).fail(onPtFail(pt));
 		$.when(practitioner).fail(onPractitionerFail(practitioner));
-		
-        $.when(pt, obv, usr).fail(onError);
+        $.when(pt, obv).fail(onError);
 
-        $.when(pt, obv, usr).done(function(patient, obv, practitioner) {
+        $.when(pt, obv, practitioner).done(function(patient, obv, practitioner) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
