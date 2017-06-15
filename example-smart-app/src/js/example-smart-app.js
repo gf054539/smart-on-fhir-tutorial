@@ -34,7 +34,7 @@
                     }
                   });
 
-		var orgs = smart.api.search( {type: 'Organization', query: {} } );
+		var orgs = smart.api.search( {type: 'Organization', query: {id: 'gt1'} } );
         $.when(pt, obv, orgs).fail(onError);
 		$.when(user).fail(onUserFail);
 		
