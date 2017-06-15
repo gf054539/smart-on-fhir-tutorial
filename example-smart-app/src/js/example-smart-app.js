@@ -34,12 +34,17 @@
                     }
                   });
 
-		
-        $.when(pt, obv).fail(onError);
+		var orgs = smart.search( {type: 'Organization'} );
+        $.when(pt, obv, orgs).fail(onError);
 		$.when(user).fail(onUserFail);
 		
 
-        $.when(pt, obv, user).done(function(patient, obv, user) {
+        $.when(pt, obv, user, orgs).done(function(patient, obv, user, orgs) {
+		  console.log(user);
+		  console.log(patient);
+		  console.log(obv);
+		  console.log(orgs);
+		  
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -63,9 +68,11 @@
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
+		  
 		  p.uid = user.id;
 		  p.user = user.user;
 		  p.userid = user.name;
+		  p.active = user.active;
 		  
           p.birthdate = dobStr;
           p.gender = gender;
