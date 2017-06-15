@@ -7,13 +7,13 @@
       ret.reject();
     }
 
-	function onPtFail( something ) {
-		console.log('Pt fail', something);
+	function onPtFail( pt ) {
+		console.log('Pt fail', pt);
 		ret.reject();
 	}
 	
-	function onPractitionerFail( anything ) {
-		console.log('practitioner fail', anything);
+	function onPractitionerFail( practitioner ) {
+		console.log('practitioner fail', practitioner);
 		ret.reject();
 	}
 	
@@ -39,8 +39,8 @@
                     }
                   });
 
-		$.when(pt).fail(onPtFail(something));
-		$.when(practioner).fail(onPractitionerFail(something));
+		$.when(pt).fail(onPtFail(pt));
+		$.when(practioner).fail(onPractitionerFail(practioner));
 		
         $.when(pt, obv, usr).fail(onError);
 
