@@ -22,10 +22,6 @@
         var patient = smart.patient;
         var pt = patient.read();
 		var user = smart.user.read();
-		var practitioner = smart.user.read({
-			type: 'Practitioner',
-			identifier: '4464007'
-		});
 		
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -38,15 +34,15 @@
                     }
                   });
 
-		$.when(pt).fail(onPtFail(pt));
-		$.when(practitioner).fail(onPractitionerFail(practitioner));
+		
         $.when(pt, obv).fail(onError);
+		
 		$.when(user).done(function( user ) {
 			console.log(user);
 			ret.resolve(user);
 		});
 
-        $.when(pt, obv, practitioner).done(function(patient, obv, practitioner) {
+        $.when(pt, obv).done(function(patient, obv, practitioner) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
