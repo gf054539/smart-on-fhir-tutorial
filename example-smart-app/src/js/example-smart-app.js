@@ -34,7 +34,7 @@
                     }
                   });
 
-		var orgs = smart.search( {type: 'Organization'} );
+		var orgs = smart.api.search( {type: 'Organization'} );
         $.when(pt, obv, orgs).fail(onError);
 		$.when(user).fail(onUserFail);
 		
