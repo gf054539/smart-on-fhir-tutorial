@@ -21,7 +21,8 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-		var practitioner = smart.api.read({
+		var p = smart.user.Practitioner;
+		var practitioner = smart.user.read({
 			type: 'Practitioner',
 			identifier: '4464007'
 		});
