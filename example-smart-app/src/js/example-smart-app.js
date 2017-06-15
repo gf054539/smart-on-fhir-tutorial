@@ -23,10 +23,10 @@
 		var user = smart.user;
 		var usr = user.read();
         var pt = patient.read();
-		var practitioner = smart.api.read({
+		var practitioner = smart.api.read(
 			type: 'Practitioner',
 			id: '4464007'
-		});
+		);
 		
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
