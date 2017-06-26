@@ -21,7 +21,7 @@
 	//ID Token is a json web token which needs validated against the keySet that's returned.
 	function validateKey(keySet, idTokenStr){
 		//Decode the token;
-		var idToken = JWT.jwsDecode(idTokenStr); 
+		var idToken = JWT.decode(idTokenStr); 
 		var targetKeyId = id.token.header.kid;
 		var locatedKey;
 		
