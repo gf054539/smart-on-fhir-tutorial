@@ -25,11 +25,11 @@
 		var targetKeyId = id.token.header.kid;
 		var locatedKey;
 		
-		keySet.keys.forEach( function( key ) {
+		keySet.keys.forEach( function( key )  {
 			if(key.kid == targetKeyId) {
 				locatedKey = key;
 			}				
-		}
+		});
 		
 		//TODO:  Crap.  Need JWK to PEM
 		//TODO:  Remove the expiration setting
