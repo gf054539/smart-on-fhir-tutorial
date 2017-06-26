@@ -39,7 +39,7 @@
 			"ignoreExpiration": true
 		};
 		try {
-			var decoded = JWT.verify( id_token, pem, options );
+			var decoded = JWT.verify( idToken, pem, options );
 			console.log(decoded);
 		} catch(err) {
 			console.log(err);
