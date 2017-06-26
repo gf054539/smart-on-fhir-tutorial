@@ -24136,10 +24136,10 @@ function rsaJwkToBuffer(jwk, opts) {
 module.exports = rsaJwkToBuffer;
 
 },{"./b64-to-bn":97,"asn1.js":48}],101:[function(require,module,exports){
-var jwk = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 var jwkPem = require('jwk-to-pem');
 
-window.JWK = jwk;
+window.JWT = jwt;
 window.JWKTOPEM = jwkPem;
 },{"jsonwebtoken":2,"jwk-to-pem":99}],102:[function(require,module,exports){
 

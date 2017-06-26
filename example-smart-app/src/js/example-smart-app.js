@@ -33,7 +33,7 @@
 		
 		//TODO:  Crap.  Need JWK to PEM
 		//TODO:  Remove the expiration setting
-		var pem = JWKTOPEM.jwkToPem(locatedKey);
+		var pem = JWKTOPEM(locatedKey);
 		var options = {
 			"algorithms" : ["RS256"],
 			"ignoreExpiration": true
