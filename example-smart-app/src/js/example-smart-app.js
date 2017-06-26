@@ -22,7 +22,7 @@
 	function validateKey(keySet, idTokenStr){
 		//Decode the token;
 		var idToken = JWT.decode(idTokenStr, {complete: true}); 
-		var targetKeyId = id.token.header.kid;
+		var targetKeyId = idToken.header.kid;
 		var locatedKey;
 		
 		keySet.keys.forEach( function( key )  {
@@ -40,8 +40,9 @@
 		};
 		try {
 			var decoded = JWT.verify( id_token, pem, options );
+			console.log(decoded);
 		} catch(err) {
-			
+			console.log(err);
 		}
 
 
