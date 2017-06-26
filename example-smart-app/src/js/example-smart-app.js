@@ -51,7 +51,7 @@
     function onReady(smart)  {
 	  //Validate Token
 	  var idToken = smart.tokenResponse.id_token;
-	  var keySet = $.getJson( "https://authorization.sandboxcerner.com/jwk", function(keySetJson){ 
+	  var keySet = $.getJSON( "https://authorization.sandboxcerner.com/jwk", function(keySetJson){ 
 		validateKey(keySetJson, idToken);
 		}
 	  );
