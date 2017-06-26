@@ -24137,10 +24137,9 @@ function extend() {
 var jwkToPem = require('jwk-to-pem'),
     jwt = require('jsonwebtoken');
 	
-var jwk = { kty: 'EC', crv: 'P-256', x: 'abc', y: '123' },
-    pem = jwkToPem(jwk);
- 
-jwt.verify(token, pem);
+window.JWKTOPEM = jwkToPem;
+window.JWT = jwt;
+
 },{"jsonwebtoken":75,"jwk-to-pem":85}],101:[function(require,module,exports){
 
 },{}],102:[function(require,module,exports){

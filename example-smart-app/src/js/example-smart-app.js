@@ -1,7 +1,7 @@
 (function(window){
   window.extractData = function() {
     var ret = $.Deferred();
-
+	
     function onError() {
       console.log('Loading error', arguments);
       ret.reject();
@@ -12,12 +12,50 @@
 		ret.reject();
 	}
 	
-	function onPractitionerFail( practitioner ) {
-		console.log('practitioner fail', practitioner);
+	function onInvalidToken( err ) {
+		console.log('Token Validate fail', practitioner);
 		ret.reject();
 	}
 	
+	//keySet is the set of valid keys in use.
+	//ID Token is a json web token which needs validated against the keySet that's returned.
+	function validateKey(keySet, idTokenStr){
+		//Decode the token;
+		var idToken = jwsDecode(idTokenStr); 
+		var targetKeyId = id.token.header.kid;
+		var locatedKey;
+		
+		keySet.keys.forEach( function( key ) {
+			if(key.kid == targetKeyId) {
+				locatedKey = key;
+			}				
+		}
+		
+		//TODO:  Crap.  Need JWK to PEM
+		//TODO:  Remove the expiration setting
+		var pem = JWKTOPEM.jwkToPem(locatedKey);
+		var options = {
+			"algorithms" : ["RS256"],
+			"ignoreExpiration": true
+		};
+		try {
+			var decoded = JWT.verify( id_token, pem, options );
+		} catch(err) {
+			
+		}
+
+
+	}
+	
+	
     function onReady(smart)  {
+	  //Validate Token
+	  var idToken = smart.tokenResponse.id_token;
+	  var keySet = $.getJson( "https://authorization.sandboxcerner.com/jwk", function(keySetJson){ 
+		validateKey(keySetJson, idToken);
+		}
+	  );
+		
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
@@ -34,16 +72,15 @@
                     }
                   });
 
-		var orgs = smart.api.search( {type: 'Organization', query: {id: 'gt1'} } );
-        $.when(pt, obv, orgs).fail(onError);
+		//var orgs = smart.api.search( {type: 'Organization', query: {id: 'gt1'} } );
+        $.when(pt, obv).fail(onError);
 		$.when(user).fail(onUserFail);
 		
 
-        $.when(pt, obv, user, orgs).done(function(patient, obv, user, orgs) {
+        $.when(pt, obv, user).done(function(patient, obv, user) {
 		  console.log(user);
 		  console.log(patient);
 		  console.log(obv);
-		  console.log(orgs);
 		  
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
@@ -170,6 +207,7 @@
     }
   }
 
+    
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
