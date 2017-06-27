@@ -18,70 +18,26 @@
     <div id='holder' >
       <h2>Example-SMART-App for GF054543</h2>
 
-      <h2>Patient Resource</h2>
+      <h2>ID Token Verified</h2>
       <table>
         <tr>
-          <th>First Name:</th>
-          <td id='fname'></td>
+          <th>Subject:</th>
+          <td id='sub'></td>
         </tr>
         <tr>
-          <th>Last Name:</th>
-          <td id='lname'></td>
+          <th>Issuer:</th>
+          <td id='iss'></td>
         </tr>
         <tr>
-          <th>Gender:</th>
-          <td id='gender'></td>
+          <th>Expiration:</th>
+          <td id='exp'></td>
         </tr>
         <tr>
-          <th>Date of Birth:</th>
-          <td id='birthdate'></td>
-        </tr>
-        <tr>
-          <th>Age:</th>
-          <td id='age'></td>
+          <th>Issued At:</th>
+          <td id='iat'></td>
         </tr>
       </table>
-      <h2>Observation Resource</h2>
-      <table>
-        <tr>
-          <th>Height:</th>
-          <td id='height'></td>
-        </tr>
-        <tr>
-          <th>Systolic Blood Pressure:</th>
-          <td id='systolicbp'></td>
-
-        </tr>
-        <tr>
-          <th>Diastolic Blood Pressure:</th>
-          <td id='diastolicbp'></td>
-        </tr>
-        <tr>
-          <th>LDL:</th>
-          <td id='ldl'></td>
-        </tr>
-        <tr>
-          <th>HDL:</th>
-          <td id='hdl'></td>
-        </tr>
-		
-      </table>
-	  <h2>User Resource</h2>
-      <table>
-        <tr>
-			<th>UserId:</th>
-			<td id='userid'></td>
-		</tr>
-		<tr>
-			<th>Id:</th>
-			<td id='uid'></td>
-		</tr>
-		<tr>
-			<th>Acive:</th>
-			<td id='active'></td>
-		</tr>
-	  </table>
-    </div>
+      </div>
     <script src='./lib/es6-shim-0.35.1.min.js'></script>
     <script src='./src/js/example-smart-app.js'></script>
     <script src='./lib/fhir-client.js'></script>
@@ -91,7 +47,7 @@
       extractData().then(
         //Display Patient Demographics and Observations if extractData was success
         function(p) {
-          drawVisualization(p);
+          showLoginInfo(p);
         },
 
         //Display 'Failed to call FHIR Service' if extractData failed
