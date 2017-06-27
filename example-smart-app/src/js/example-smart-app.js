@@ -8,7 +8,9 @@
     }
 
  	function onInvalidToken( err ) {
-		console.log('Token Validate fail', practitioner);
+		$('#error').html("<h1>Invalid Token!<h1>");
+		$('#error').show();
+		console.log('Token Validate fail', err);
 		ret.reject();
 	}
 	
