@@ -38,7 +38,7 @@
 		} catch(err) {
 			onInvalidToken(err);
 		}
-        if( decodeURIComponent(idToken.payload.iss) == "https://fhir-ehr.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca" ) {
+        if( decodeURIComponent(idToken.payload.iss) == "https://authorization.sandboxcerner.com/tenants/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/oidc/idsps/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca/" ) {
             var loginInfo = defaultInfo();
             loginInfo.sub = idToken.payload.sub;
             loginInfo.iss = idToken.payload.iss;
