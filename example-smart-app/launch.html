@@ -27,7 +27,7 @@
 
       var params = getSearchParameters();
 	
-      if( params.iss == "https://fhir-ehr.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca" ) {
+      if( decodeURIComponent(params.iss) == "https://fhir-ehr.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca" ) {
           FHIR.oauth2.authorize({
             'client_id': '49d4344e-054f-4d87-ae9d-942f94d01ec4',
             'scope':  'patient/Patient.read patient/Observation.read user/Practitioner.read user/Organization.read launch online_access openid profile'
