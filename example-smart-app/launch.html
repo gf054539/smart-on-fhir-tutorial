@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
-    <title>Example-SMART-App GF054539</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
+	<title>Example-SMART-App GF054539</title>
   </head>
   <body>
-    <script src='./lib/fhir-client.js'></script>
-    <script>
-      FHIR.oauth2.authorize({
-        'client_id': '49d4344e-054f-4d87-ae9d-942f94d01ec4',
-        'scope':  'patient/Patient.read patient/Observation.read user/Practitioner.read user/Organization.read launch online_access openid profile'
-      });
-    </script>
-    <div class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
+	<script src='./lib/fhir-client.js'></script>
+	<script>
+	  function getSearchParameters() {
+		var prmstr = window.location.search.substr(1);
+		return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+	  }
+
+      function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+      return params;
+      }
+
+      var params = getSearchParameters();
+	
+      if( params.iss == "https://fhir-ehr.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca" ) {
+          FHIR.oauth2.authorize({
+            'client_id': '49d4344e-054f-4d87-ae9d-942f94d01ec4',
+            'scope':  'patient/Patient.read patient/Observation.read user/Practitioner.read user/Organization.read launch online_access openid profile'
+          });
+       } else {
+        $('#busy').hide();
+        $('#error').html("Invalid Issuer!");
+       }
+	</script>
+	<div id='busy' class="spinner">
+	  <div class="bounce1"></div>
+	  <div class="bounce2"></div>
+	  <div class="bounce3"></div>
+	</div>
+    <div id='error'><div> 
   </body>
 </html>
