@@ -38,12 +38,16 @@
 		} catch(err) {
 			onInvalidToken(err);
 		}
-		var loginInfo = defaultInfo();
-		loginInfo.sub = idToken.payload.sub;
-		loginInfo.iss = idToken.payload.iss;
-		loginInfo.exp = idToken.payload.exp;
-		loginInfo.iat = idToken.payload.iat;
-		return loginInfo;
+        if( decodeURIComponent(idToken.payload.iss) == "https://fhir-ehr.sandboxcerner.com/dstu2/0b8a0111-e8e6-4c26-a91c-5069cbc6b1ca" ) {
+            var loginInfo = defaultInfo();
+            loginInfo.sub = idToken.payload.sub;
+            loginInfo.iss = idToken.payload.iss;
+            loginInfo.exp = idToken.payload.exp;
+            loginInfo.iat = idToken.payload.iat;
+            return loginInfo;
+        } else {
+            onInvalidToken( {message: "invalid token" } );
+        }
 	}
 	
     function onReady(smart)  {
